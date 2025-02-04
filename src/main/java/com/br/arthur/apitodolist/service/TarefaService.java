@@ -65,7 +65,8 @@ public class TarefaService {
 
     public void deleteById (Long id) {
         logger.info("Deletando tarefa de Id = " + id);
-        repository.deleteById(id);
+        var tarefa = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada"));
+        repository.delete(tarefa);
     }
 
 }

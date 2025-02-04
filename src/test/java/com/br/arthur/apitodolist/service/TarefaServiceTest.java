@@ -84,11 +84,13 @@ class TarefaServiceTest {
 
     @Test
     void shouldDeleteTarefa() {
-        doNothing().when(tarefaRepository).deleteById(1L);
+        when(tarefaRepository.findById(1L)).thenReturn(Optional.of(tarefa));
+        doNothing().when(tarefaRepository).delete(tarefa);
 
         tarefaService.deleteById(1L);
 
-        verify(tarefaRepository, times(1)).deleteById(1L);
+        verify(tarefaRepository, times(1)).findById(1L);
+        verify(tarefaRepository, times(1)).delete(tarefa);
     }
 }
 
