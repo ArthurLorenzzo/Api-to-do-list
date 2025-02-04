@@ -4,6 +4,8 @@ import com.br.arthur.apitodolist.dto.AtualizarStatusDto;
 import com.br.arthur.apitodolist.dto.TarefaDto;
 import com.br.arthur.apitodolist.model.Tarefa;
 import com.br.arthur.apitodolist.repository.TarefaRepository;
+import com.br.arthur.apitodolist.shared.exception.GlobalExceptionHandler;
+import com.br.arthur.apitodolist.shared.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -36,7 +38,7 @@ public class TarefaService {
     public TarefaDto findById (Long id) {
         logger.info("Buscando Tarefa com Id = " + id);
         var tarefaDTO = new TarefaDto();
-        var tarefa = repository.findById(id).orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+        var tarefa = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada"));
         BeanUtils.copyProperties(tarefa, tarefaDTO);
         return tarefaDTO;
     }
@@ -56,7 +58,7 @@ public class TarefaService {
 
     public TarefaDto updateStatus(Long id, AtualizarStatusDto statusDto) {
         logger.info("Atualizando status da tarefa de Id = " + id);
-        Tarefa tarefa = repository.findById(id).orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+        Tarefa tarefa = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada"));
         tarefa.setStatus(statusDto.getStatus());
         tarefa = repository.save(tarefa);
         return new TarefaDto(tarefa);

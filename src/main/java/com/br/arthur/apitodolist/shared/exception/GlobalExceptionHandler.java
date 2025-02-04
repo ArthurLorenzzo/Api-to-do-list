@@ -6,8 +6,10 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,6 +17,24 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleResourceNotFound(ResourceNotFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("erro", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Map<String, String>> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        Map<String, String> error = new HashMap<>();
+        String nomeParametro = ex.getName();
+        String mensagemErro = "O parâmetro '" + nomeParametro + "' recebeu um valor inválido";
+        error.put("erro", mensagemErro);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -27,6 +47,14 @@ public class GlobalExceptionHandler {
         });
 
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, String>> handleGlobalException(Exception ex, WebRequest request) {
+        Map<String, String> error = new HashMap<>();
+        error.put("erro", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -54,13 +82,5 @@ public class GlobalExceptionHandler {
         }
 
         return "Erro de conversão: O valor '" + ex.getValue() + "' não pode ser convertido para " + targetType.getSimpleName();
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleGlobalException(Exception ex, WebRequest request) {
-        Map<String, String> error = new HashMap<>();
-        error.put("erro", ex.getMessage());
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 }
