@@ -60,26 +60,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleJsonParseException(HttpMessageNotReadableException ex) {
         Map<String, String> error = new HashMap<>();
 
-        if (ex.getCause() instanceof InvalidFormatException invalidFormatException) {
-            error.put("erro", getInvalidFormatMessage(invalidFormatException));
+        if (ex.getCause() instanceof InvalidFormatException) {
+            error.put("erro", "O valor enviado é inválido. Use um dos valores permitidos: Pendente, Em Andamento, Concluida");
         } else {
             error.put("erro", "Erro ao processar a requisição: " + ex.getMessage());
         }
 
         return ResponseEntity.badRequest().body(error);
-    }
-    private String getInvalidFormatMessage(InvalidFormatException ex) {
-        Class<?> targetType = ex.getTargetType();
-
-        if (targetType.isEnum()) {
-            String valoresValidos = String.join(", ",
-                    Arrays.stream(targetType.getEnumConstants())
-                            .map(Object::toString)
-                            .toArray(String[]::new)
-            );
-            return "O valor enviado é inválido. Use um dos valores permitidos: " + valoresValidos;
-        }
-
-        return "Erro de conversão: O valor '" + ex.getValue() + "' não pode ser convertido para " + targetType.getSimpleName();
     }
 }
