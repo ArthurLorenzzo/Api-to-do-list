@@ -4,7 +4,6 @@ import com.br.arthur.apitodolist.dto.AtualizarStatusDto;
 import com.br.arthur.apitodolist.dto.TarefaDto;
 import com.br.arthur.apitodolist.model.Tarefa;
 import com.br.arthur.apitodolist.repository.TarefaRepository;
-import com.br.arthur.apitodolist.shared.exception.GlobalExceptionHandler;
 import com.br.arthur.apitodolist.shared.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
