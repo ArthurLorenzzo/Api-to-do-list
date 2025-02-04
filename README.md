@@ -2,7 +2,7 @@
 
 Este projeto é uma API para gerenciar tarefas (To-Do List) desenvolvida em **Spring Boot**.
 
-## 🚀 Como Rodar Localmente
+## Como Rodar Localmente
 
 ### 🛠️ Pré-requisitos
 
@@ -11,16 +11,11 @@ Este projeto é uma API para gerenciar tarefas (To-Do List) desenvolvida em **Sp
 
 ### 📦 Instalação
 
-1. Clone este repositório:
-   \`\`\`sh
-   git clone https://github.com/seu-usuario/api-to-do-list.git
-   cd api-to-do-list
-   \`\`\`
-
-2. Compile e execute a aplicação:
-   \`\`\`sh
-   mvn spring-boot:run
-   \`\`\`
+1. Clone este repositório: git clone https://github.com/ArthurLorenzzo/Api-to-do-list.git
+   
+2. Acesse o diretorio do projeto: cd api-to-do-list
+   
+3. Compile e execute a aplicação: mvn spring-boot:run
 
 3. A API estará disponível em `http://localhost:8080`.
 
@@ -32,13 +27,13 @@ Este projeto é uma API para gerenciar tarefas (To-Do List) desenvolvida em **Sp
 - **Método:** `POST`
 - **Endpoint:** `/api/tarefas`
 - **Body JSON:**
-  \`\`\`json
+ 
   {
     "titulo": "Estudar Spring Boot",
     "descricao": "Ler a documentação oficial",
     "status": "Pendente"
   }
-  \`\`\`
+  
 
 #### Buscar todas as tarefas
 - **Método:** `GET`
@@ -52,11 +47,11 @@ Este projeto é uma API para gerenciar tarefas (To-Do List) desenvolvida em **Sp
 - **Método:** `PUT`
 - **Endpoint:** `/api/tarefas/{id}`
 - **Body JSON:**
-  \`\`\`json
+ 
   {
     "status": "Concluida"
   }
-  \`\`\`
+
 
 #### Deletar uma tarefa
 - **Método:** `DELETE`
