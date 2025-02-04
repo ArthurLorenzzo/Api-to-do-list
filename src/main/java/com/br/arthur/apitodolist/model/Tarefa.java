@@ -1,9 +1,8 @@
 package com.br.arthur.apitodolist.model;
 
-import com.br.arthur.apitodolist.enums.StatusEnum;
+import com.br.arthur.apitodolist.shared.enums.StatusEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
 @Entity
 public class Tarefa {
@@ -23,6 +22,16 @@ public class Tarefa {
     @Enumerated(EnumType.STRING)
     @NotNull
     private StatusEnum status;
+
+    public Tarefa() {
+    }
+
+    public Tarefa(Long id, String titulo, String descricao, StatusEnum status) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.status = status;
+    }
 
     public Long getId() {
         return id;

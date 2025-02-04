@@ -2,7 +2,6 @@ package com.br.arthur.apitodolist.service;
 
 import com.br.arthur.apitodolist.dto.AtualizarStatusDto;
 import com.br.arthur.apitodolist.dto.TarefaDto;
-import com.br.arthur.apitodolist.enums.StatusEnum;
 import com.br.arthur.apitodolist.model.Tarefa;
 import com.br.arthur.apitodolist.repository.TarefaRepository;
 import org.slf4j.Logger;
@@ -55,11 +54,12 @@ public class TarefaService {
                 .toList();
     }
 
-    public void updateStatus(Long id, AtualizarStatusDto statusDto) {
+    public TarefaDto updateStatus(Long id, AtualizarStatusDto statusDto) {
         logger.info("Atualizando status da tarefa de Id = " + id);
         Tarefa tarefa = repository.findById(id).orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
         tarefa.setStatus(statusDto.getStatus());
-        repository.save(tarefa);
+        tarefa = repository.save(tarefa);
+        return new TarefaDto(tarefa);
     }
 
     public void deleteById (Long id) {

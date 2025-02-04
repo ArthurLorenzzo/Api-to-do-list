@@ -37,9 +37,9 @@ public class TarefaController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateStatus (@PathVariable Long id, @Valid @RequestBody AtualizarStatusDto status) {
-        service.updateStatus(id, status);
-        return ResponseEntity.status(HttpStatus.OK).body("Status Atualizado com sucesso");
+    public ResponseEntity<TarefaDto> updateStatus (@PathVariable Long id, @Valid @RequestBody AtualizarStatusDto status) {
+        var tarefa = service.updateStatus(id, status);
+        return ResponseEntity.status(HttpStatus.OK).body(tarefa);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -1,9 +1,9 @@
 package com.br.arthur.apitodolist.dto;
 
-import com.br.arthur.apitodolist.enums.StatusEnum;
+import com.br.arthur.apitodolist.model.Tarefa;
+import com.br.arthur.apitodolist.shared.enums.StatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
 public class TarefaDto {
 
@@ -17,6 +17,23 @@ public class TarefaDto {
 
     @NotNull(message = "O atributo status é obrigatório")
     private StatusEnum status;
+
+    public TarefaDto() {
+    }
+
+    public TarefaDto(Long id, String titulo, String descricao, StatusEnum status) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.status = status;
+    }
+
+    public TarefaDto(Tarefa tarefa) {
+        this.id = tarefa.getId();
+        this.titulo = tarefa.getTitulo();
+        this.descricao = tarefa.getDescricao();
+        this.status = tarefa.getStatus();
+    }
 
     public Long getId() {
         return id;

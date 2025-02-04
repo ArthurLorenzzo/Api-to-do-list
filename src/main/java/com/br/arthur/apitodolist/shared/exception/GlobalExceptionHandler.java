@@ -1,5 +1,4 @@
-package com.br.arthur.apitodolist.exception;
-import com.br.arthur.apitodolist.enums.StatusEnum;
+package com.br.arthur.apitodolist.shared.exception;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
