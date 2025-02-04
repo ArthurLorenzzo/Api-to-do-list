@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class AtualizarStatusDto {
 
-    @NotNull(message = "O atributo status é obrigatório")
+    @NotNull(message = "O campo status é obrigatório")
     private StatusEnum status;
 
     public StatusEnum getStatus() {

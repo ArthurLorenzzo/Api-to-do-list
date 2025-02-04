@@ -10,12 +10,12 @@ public class TarefaDto {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @NotNull(message = "O atributo titulo é obrigatório")
+    @NotNull(message = "O campo titulo é obrigatório")
     private String titulo;
 
     private String descricao;
 
-    @NotNull(message = "O atributo status é obrigatório")
+    @NotNull(message = "O campo status é obrigatório")
     private StatusEnum status;
 
     public TarefaDto() {
