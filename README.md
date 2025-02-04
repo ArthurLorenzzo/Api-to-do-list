@@ -21,7 +21,7 @@ Este projeto é uma API para gerenciar tarefas (To-Do List) desenvolvida em **Sp
 
 5. A API estará disponível em `http://localhost:8080`.
 
-6. Para acessar o banco H2 `http://localhost:8080/h2-console` e trocar a jdbc url para `jdbc:h2:mem:tarefasdb`
+6. Caso queira acessar o banco H2 `http://localhost:8080/h2-console` e trocar a jdbc url para `jdbc:h2:mem:tarefasdb`
 
 ## 📡 Endpoints da API
 
